@@ -159,5 +159,10 @@ namespace BlackJack
             }
             ShowPlayers();
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("help.pdf");
+        }
     }
 }

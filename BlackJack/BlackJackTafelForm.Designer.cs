@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnDeal = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBet)).BeginInit();
@@ -159,11 +160,22 @@
             this.btnDeal.UseVisualStyleBackColor = true;
             this.btnDeal.Click += new System.EventHandler(this.btnDeal_Click);
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(333, 36);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(100, 23);
+            this.btnHelp.TabIndex = 12;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // BlackJackTafelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 375);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnDeal);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -200,6 +212,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDeal;
+        private System.Windows.Forms.Button btnHelp;
     }
 }
 
