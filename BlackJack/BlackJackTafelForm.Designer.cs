@@ -85,6 +85,7 @@
             this.btnExtraCard.Text = "Extra Card";
             this.btnExtraCard.UseVisualStyleBackColor = true;
             this.btnExtraCard.Visible = false;
+            this.btnExtraCard.Click += new System.EventHandler(this.btnExtraCard_Click);
             // 
             // btnDouble
             // 
@@ -95,6 +96,7 @@
             this.btnDouble.Text = "Double";
             this.btnDouble.UseVisualStyleBackColor = true;
             this.btnDouble.Visible = false;
+            this.btnDouble.Click += new System.EventHandler(this.btnDouble_Click);
             // 
             // nudBet
             // 
@@ -102,7 +104,6 @@
             this.nudBet.Name = "nudBet";
             this.nudBet.Size = new System.Drawing.Size(100, 22);
             this.nudBet.TabIndex = 5;
-            this.nudBet.ValueChanged += new System.EventHandler(this.nudBet_ValueChanged);
             // 
             // label1
             // 

@@ -21,11 +21,12 @@ namespace BlackJack
         BlackJackDeck _deck;
 
         int _bankRoll;
+        int _betValue;
         public BlackJackTafelForm()
         {
             InitializeComponent();
             _bankRoll = 100;
-            _lastBetValue = 0;
+            _betValue = 0;
             SetupPlayers();
             tbBankRoll.Text = _bankRoll.ToString();
 
@@ -43,12 +44,15 @@ namespace BlackJack
             btnDouble.Visible = false;
             btnPass.Visible = false;
             btnExtraCard.Visible = false;
+            nudBet.Value = _betValue;
         }
 
         private void btnDeal_Click(object sender, EventArgs e)
         {
             if (nudBet.Value > 0)
             {
+                _betValue = (int)nudBet.Value;
+
                 nudBet.ReadOnly = true;
                 btnDeal.Visible = false;
                 _playerHand.Add(_deck.GiveCard());
@@ -67,24 +71,16 @@ namespace BlackJack
                         btnDouble.Visible = true;
                     }
                 }
+                else
+                {
+                    _dealerHand.Add(_deck.GiveCard());
+                    btnPass_Click(sender, e);
+                }
             }
         }
 
-        int _lastBetValue;
-
         private void nudBet_ValueChanged(object sender, EventArgs e)
         {
-            int v = (int)nudBet.Value;
-            _bankRoll -= (v - _lastBetValue);
-            if (_bankRoll < 0)
-            {
-                _bankRoll += (v - _lastBetValue);
-            }
-            else
-            {
-                _lastBetValue = (int)nudBet.Value;
-            }
-            tbBankRoll.Text = _bankRoll.ToString();
         }
 
         private void btnPass_Click(object sender, EventArgs e)
@@ -103,6 +99,7 @@ namespace BlackJack
                 if (_dealerHand.isBusted)
                 {
                     boodschap = "You win";
+                    _bankRoll += _betValue;
                 }
                 else
                 {
@@ -115,17 +112,19 @@ namespace BlackJack
                     {
                         if (_dealerHand.Score < _playerHand.Score)
                         {
-                            _bankRoll += (int)(2 * nudBet.Value);
+                            _bankRoll += _betValue;
                             boodschap = "You Win";
                         }
                         else
                         {
                             boodschap = "You lose";
+                            _bankRoll -= _betValue;
+                            nudBet.Value = 0;
                         }
                     }
                 }  
             }
-            else { boodschap = "You are Busted"; }
+            else { boodschap = "You are Busted";  }
             ShowPlayers();
             MessageBox.Show(boodschap);
             SetupPlayers();
@@ -136,6 +135,29 @@ namespace BlackJack
         {
             pbDealer.Image = _dealerHand.Picture;
             pbPlayer.Image = _playerHand.Picture;
+            tbBankRoll.Text = _bankRoll.ToString();
+        }
+
+        private void btnDouble_Click(object sender, EventArgs e)
+        {
+            int v = (int) nudBet.Value;
+            if( _bankRoll-v>=0)
+            {
+                _betValue = 2 * v;
+                _playerHand.Add(_deck.GiveCard());
+                btnPass_Click(sender, e);
+            }
+            ShowPlayers();            
+        }
+
+        private void btnExtraCard_Click(object sender, EventArgs e)
+        {
+            _playerHand.Add(_deck.GiveCard());
+            if(_playerHand.isBusted)
+            {
+                btnPass_Click(sender, e);
+            }
+            ShowPlayers();
         }
     }
 }
